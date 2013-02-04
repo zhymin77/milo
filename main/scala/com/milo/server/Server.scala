@@ -7,11 +7,11 @@ import unfiltered.response._
 
 object Server {
   def main(args: Array[String]) = {
-    unfiltered.netty.Http(ServerSetting.serverPort.toInt).plan(asyncPlanify(
+    println("start listening on port: " + ServerSetting.port)
+    unfiltered.netty.Http(ServerSetting.port).plan(asyncPlanify(
       MainIntent.hello,
       MainIntent.wi
     )).run()
-    println("listening port: " + ServerSetting.serverPort)
   }
 
   import unfiltered.netty.async.Plan.Intent

@@ -1,9 +1,11 @@
 package com.milo.server.intents
 
+import com.milo.server.utils.ScalateSupport
+
 import unfiltered.request._
 import unfiltered.response._
 
-object MainIntent {
+object MainIntent extends ScalateSupport{
 
   val hello = unfiltered.netty.async.Intent {
     case req@GET(Path(Seg("aa" :: p :: Nil))) =>

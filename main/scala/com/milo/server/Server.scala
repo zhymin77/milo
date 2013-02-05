@@ -8,7 +8,8 @@ import unfiltered.response._
 object Server {
   def main(args: Array[String]) = {
     println("start listening on port: " + ServerSetting.port)
-    unfiltered.netty.Http(ServerSetting.port).plan(asyncPlanify(
+    unfiltered.netty.Http(ServerSetting.port)
+      .plan(asyncPlanify(
       MainIntent.hello,
       MainIntent.wi
     )).run()

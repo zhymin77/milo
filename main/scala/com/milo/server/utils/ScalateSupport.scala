@@ -8,19 +8,19 @@ import unfiltered.response.ResponseWriter
 trait ScalateSupport {
   protected def scalateDefaultLayoutUri: String = "layout.ssp"
   protected def scalateDefaultTemplateDirs: List[File] =
-    new File("resources/templates/views") :: Nil
+    new File(this.getClass.getResource("/templates/views/").getFile) :: Nil
   protected lazy val scalateEngine =
     new ScalateTemplateEngine(scalateDefaultLayoutUri, scalateDefaultTemplateDirs: _*)
 
   def render(uri: String,
     attributes: Map[String, Any] = Map(), extraBindings: Traversable[Binding] = Nil)
-    (implicit defaultAttributes: Map[String, Any]) =
+    /*(implicit defaultAttributes: Map[String, Any])*/ =
       new ResponseWriter {
         def write(writer: OutputStreamWriter) {
           val printWriter = new PrintWriter(writer)
           try {
             scalateEngine.renderWithWriter(uri, printWriter,
-              attributes ++ defaultAttributes, extraBindings)
+              attributes/* ++ defaultAttributes*/, extraBindings)
           } catch {
             case e if scalateEngine.isDevelopmentMode =>
             printWriter.println("<pre>")

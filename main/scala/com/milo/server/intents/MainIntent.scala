@@ -9,7 +9,7 @@ object MainIntent extends ScalateSupport{
 
   val hello = unfiltered.netty.async.Intent {
     case req@GET(Path(Seg("aa" :: p :: Nil))) =>
-      req.respond(HtmlContent ~> ResponseString(p))
+      req.respond(HtmlContent ~> render("main/index.ssp", Map()))
   }
 
   val wi = unfiltered.netty.async.Intent {
